@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/Backgrounds/backgroundColorForest.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/UI/PlayButton.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/UI/QuitButton.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/playAgainBtn.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/quitBtn.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/UI/Titulo.png" type="Texture" id=8]
+
+[node name="Menu" type="Node"]
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 0.251389, 0.251389 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 1280, 720 )
+
+[node name="playBtn" type="TextureButton" parent="."]
+margin_left = 106.0
+margin_top = 100.0
+margin_right = 177.0
+margin_bottom = 129.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 2 )
+expand = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quitBtn" type="TextureButton" parent="."]
+margin_left = 116.0
+margin_top = 145.0
+margin_right = 175.0
+margin_bottom = 169.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+expand = true
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Titulo" type="Sprite" parent="."]
+position = Vector2( 10, -28 )
+scale = Vector2( 0.248611, 0.248611 )
+texture = ExtResource( 8 )
+centered = false
+
+[connection signal="pressed" from="playBtn" to="playBtn" method="_on_playAgainBtn_pressed"]
+[connection signal="pressed" from="quitBtn" to="quitBtn" method="_on_playAgainBtn_pressed"]
