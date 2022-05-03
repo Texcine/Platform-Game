@@ -165,12 +165,11 @@ script = ExtResource( 1 )
 scale = Vector2( 0.625, 0.625 )
 frames = SubResource( 33 )
 animation = "idle"
-frame = 8
+frame = 7
 playing = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 2 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 34 )
 one_way_collision_margin = 0.0
 
@@ -180,8 +179,14 @@ one_way_collision_margin = 0.0
 position = Vector2( 0, -5 )
 shape = SubResource( 35 )
 
+[node name="GaloDano" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GaloDano"]
+polygon = PoolVector2Array( -9, -2, -9, 10, 10, 10, 10, -4, -9, -4 )
+
 [connection signal="area_entered" from="EnemyArea" to="." method="_on_EnemyArea_area_entered"]
 [connection signal="area_exited" from="EnemyArea" to="." method="_on_EnemyArea_area_exited"]
 [connection signal="body_entered" from="EnemyArea" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="EnemyArea" to="." method="_on_Area2D_body_exited"]
 [connection signal="body_shape_entered" from="EnemyArea" to="." method="_on_EnemyArea_body_shape_entered"]
+[connection signal="area_entered" from="GaloDano" to="." method="_on_GaloDano_area_entered"]

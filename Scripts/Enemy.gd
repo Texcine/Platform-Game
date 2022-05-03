@@ -9,16 +9,26 @@ var dir = "esquerda"
 var time = 0
 var speed = 50
 var damaged = false
+var player
+var life = 30
+
+#export(NodePath) var Player | Pegando o nodepath via inspector
+
 #onready var gravityforce = self.get_parent().find_node("Jogador")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = get_parent().find_node("Jogador")
 	gravityforce = self.get_parent().find_node("Jogador").gravityForce
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if life <= 0:
+		get_parent().remove_child(self)
+	
 	motion.y = motion.y + gravityforce
 	
 	_MoveEnemy()
@@ -64,6 +74,7 @@ func _on_Area2D_body_entered(body):
 		print(body.name)
 		damaged = true
 		get_child(0).animation = "hit"	
+		life -= player.dano
 	if body.name == "FireBall":
 		print(body.name)
 
@@ -76,8 +87,14 @@ func _on_EnemyArea_area_entered(area):
 	if area.name == "FireBallArea":
 		damaged = true
 		get_child(0).animation = "hit"	
+		life -= player.dano
 
 
 func _on_EnemyArea_area_exited(area):
 	if area.name == "FireBallArea":
 		damaged = false
+
+
+func _on_GaloDano_area_entered(areadano):
+	if areadano.name == "Jogador":
+		player.life -= 50

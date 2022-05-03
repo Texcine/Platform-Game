@@ -6,8 +6,14 @@ var jumpForce = 245
 var gravityForce = 10
 var isJumping = false
 var fireBall = preload("res://Instatiables/FireBall.tscn")
+var life = 100
+var dano = 20
 
 func _physics_process(delta):
+	
+	if life <= 0:
+		print("morri")
+		get_tree().change_scene("res://Scenes/Game.tscn")
 	
 	motion.y = motion.y + gravityForce
 	
